@@ -37,14 +37,22 @@ body {
 }
 
 #container #title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 15px;
   background-color: #724ae8;
   text-align: center;
+  color: #ffffff;
 }
 
 #container #title h1 {
   font-size: 1.4rem;
-  color: #ffffff;
+}
+
+#container #title i {
+  display: none;
+  cursor: pointer;
 }
 
 #container #title h1::first-letter {
@@ -174,7 +182,15 @@ body {
   }
 
   .show-container #container-toggler {
-    bottom: unset;
-    top: 8px;
+    display: none;
+  }
+
+  .show-container #container #title {
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .show-container #container #title i {
+    display: block;
   }
 }
