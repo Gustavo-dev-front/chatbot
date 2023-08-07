@@ -18,6 +18,7 @@ body {
 
 #container {
   transform: scale(0);
+  transform-origin: bottom right;
   opacity: 0;
   transition: all 0.3s ease;
   position: fixed;
@@ -51,8 +52,9 @@ body {
 }
 
 #container #title i {
-  display: none;
   cursor: pointer;
+  pointer-events: none;
+  opacity: 0;
 }
 
 #container #title h1::first-letter {
@@ -67,7 +69,7 @@ body {
 
 #chat-box .message {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 5px;
   margin: 20px 0;
 }
@@ -96,6 +98,11 @@ body {
   color: #000000;
 }
 
+#chat-box .message.bot p.error {
+  color: #721c24;
+  background-color: #f8d7da;
+}
+
 #chat-box .message.bot i {
   background-color: #724ae8;
   padding: 5px;
@@ -110,6 +117,7 @@ body {
   display: flex;
   align-items: center;
   border-top: 1px solid #cccccc;
+  background-color: #ffffff;
 }
 
 #input-box * {
@@ -123,18 +131,31 @@ body {
   resize: none;
   border: none;
   outline: none;
+  max-height: 180px;
 }
 
 #input-box button {
   color: #724ae8;
-  background-color: #ffffff;
   border: none;
   cursor: pointer;
-  display: none;
+  visibility: hidden;
+  pointer-events: none;
+  background: none;
 }
 
 #input-box textarea:valid + button {
-  display: block;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(0.8);
+  }
+
+  to {
+    transform: scale(1);
+  }
 }
 
 #container-toggler {
@@ -150,10 +171,21 @@ body {
   width: 50px;
   height: 50px;
   border-radius: 50%;
+  cursor: pointer;
+  animation: pulse 1s infinite alternate;
 }
 
 #container-toggler i {
   position: absolute;
+  transition: transform 0.3s;
+}
+
+.show-container #container-toggler {
+  animation: none;
+}
+
+.show-container #container-toggler i {
+  transform: rotate(90deg);
 }
 
 #container-toggler i:last-child {
@@ -191,6 +223,7 @@ body {
   }
 
   .show-container #container #title i {
-    display: block;
+    opacity: 1;
+    pointer-events: auto;
   }
 }
